@@ -4,6 +4,8 @@ import os.path
 import re
 import os
 import timeit
+import time as t
+from time import time
 
 
 
@@ -54,42 +56,35 @@ def generate(modulus, increment):
          
     result = int(str(''.join([str(i) for i in output]))[-1])
     return result
-start=t.ctime().split(" ")[3]
-maxlist=[]
-minlist=[]
-m=10
-i=0
-loop=True
-times=100
-while loop:
-    t.sleep(0.00000000000001)
-    num=generate(m,i)
-    #print num
-    if num >= 5:
-        if len(maxlist)<73:
-            maxlist.append(num)
-    else:
-        if  len(minlist)<27:
-            minlist.append(num)
-    if len(maxlist)==73 and len(minlist)==27:
-        loop=False
-end=t.ctime().split(" ")[3]
-print(start,end)
-print(len(minlist),len(maxlist))
-print(minlist)
-print(maxlist)
-
-
-
 
 
 @app.route("/")
 def index():
-	#define number between 1 to 10
-	number = 6	
-	random = timeit.Timer('for i in range(1000):i**i').timeit(1)*100%10*number
-	print random
-	return str(random)
+	start=t.ctime().split(" ")[3]
+	maxlist=[]
+	minlist=[]
+	m=10
+	i=0
+	loop=True
+	times=100
+	while loop:
+	    t.sleep(0.00000000000001)
+	    num=generate(m,i)
+	    #print num
+	    if num >= 5:
+	        if len(maxlist)<73:
+	            maxlist.append(num)
+	    else:
+	        if  len(minlist)<27:
+	            minlist.append(num)
+	    if len(maxlist)==73 and len(minlist)==27:
+	        loop=False
+	end=t.ctime().split(" ")[3]
+	print(start,end)
+	print(len(minlist),len(maxlist))
+	print(minlist)
+	print(maxlist)
+	return json.dumps(maxlist + minlist)
 
 
 
