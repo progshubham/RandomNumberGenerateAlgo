@@ -1,15 +1,9 @@
 from flask import Flask, Response, send_from_directory, render_template, request, flash, session, abort, json
 from flask import url_for, redirect
 import os.path
-import jinja2
 import re
 import os
-import socket
-import time
-from datetime import timedelta
-import datetime
-import hashlib
-import random 
+import timeit
 
 
 
@@ -18,21 +12,16 @@ app.debug = True
 app.secret_key = os.urandom(24)
 
 
-current = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-date = datetime.datetime.now().date()
-ts = time.time()
-timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
 
 
 @app.route("/")
-# @app.cache.cached(timeout=300)  # cache this view for 5 minutes
-def login():
-	if session.get('logged_in'):
-		return redirect(url_for('dashboard'))
-	else:
-		error = None
-		return render_template('login.html')
+def index():
+	#define number between 1 to 10
+	number = 6
+	random = timeit.Timer('for i in range(1000):i**i').timeit(1)*10032890%100*number
+	print random
+	return str(random)
 
 
 
